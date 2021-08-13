@@ -50,7 +50,6 @@ export default class App extends React.Component {
     await Font.loadAsync({
       'JosefinSans-Regular': require('./assets/fonts/JosefinSans-Regular.ttf'),
       'JosefinSans-SemiBold': require('./assets/fonts/JosefinSans-SemiBold.ttf'),
-
       'JosefinSans-Bold': require('./assets/fonts/JosefinSans-Bold.ttf'),
       'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
     });
@@ -59,13 +58,13 @@ export default class App extends React.Component {
   render() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ title: "Home Screen" }}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen}/>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="HomeWorkouts" component={HomeWorkouts} />
 
