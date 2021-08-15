@@ -6,28 +6,56 @@ import {
   Layout,
   Text,
   Button,
+  TopNavigation,
+  TopNavigationAction,
+  Icon,
 } from "@ui-kitten/components";
+import { SafeAreaView } from "react-navigation";
 
 function DetailsScreen({ navigation }) {
+  const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
+
+  const navigateBack = () => {
+    navigation.goBack();
+  };
+
+  const BackAction = () => (
+    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+  );
+
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Button style={styles.button} onPress={() => navigation.push("Details")}>
-        Details again
-      </Button>
-      <Button style={styles.button} onPress={() => navigation.navigate("Home")}>
-        Home
-      </Button>
-      <Button
-        style={styles.button}
-        title="Go back"
-        onPress={() => navigation.goBack()}
-      >
-        Go back
-      </Button>
-      <Button style={styles.button} onPress={() => navigation.popToTop()}>
-        First screen in stack
-      </Button>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
+      <TopNavigation
+        alignment="center"
+        title="DETAILS"
+        accessoryLeft={BackAction}
+      />
+
+      <Layout style={styles.layout} level="2">
+        <Button
+          style={styles.button}
+          onPress={() => navigation.push("Details")}
+        >
+          Details again
+        </Button>
+        <Button
+          style={styles.button}
+          onPress={() => navigation.navigate("Home")}
+        >
+          Home
+        </Button>
+        <Button
+          style={styles.button}
+          title="Go back"
+          onPress={() => navigation.goBack()}
+        >
+          Go back
+        </Button>
+        <Button style={styles.button} onPress={() => navigation.popToTop()}>
+          First screen in stack
+        </Button>
+      </Layout>
+    </SafeAreaView>
   );
 }
 

@@ -1,8 +1,7 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as Font from "expo-font";
 import DetailsScreen from "./DetailsScreen.js";
 import Splash from "./Splash.js";
 import HomeWorkouts from "./HomeWorkouts.js";
@@ -14,7 +13,9 @@ import {
   Button,
   BottomNavigation,
   BottomNavigationTab,
+  IconRegistry,
 } from "@ui-kitten/components";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as theme } from "./theme.json";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -58,20 +59,14 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: "5%",
   },
+  navigation: {
+    marginBottom: "5%",
+  },
 });
 
 const Stack = createNativeStackNavigator();
 
 export default class App extends React.Component {
-  async componentDidMount() {
-    await Font.loadAsync({
-      "JosefinSans-Regular": require("./assets/fonts/JosefinSans-Regular.ttf"),
-      "JosefinSans-SemiBold": require("./assets/fonts/JosefinSans-SemiBold.ttf"),
-      "JosefinSans-Bold": require("./assets/fonts/JosefinSans-Bold.ttf"),
-      "Lato-Light": require("./assets/fonts/Lato-Light.ttf"),
-    });
-  }
-
   render() {
     const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -97,12 +92,16 @@ export default class App extends React.Component {
         <Screen name="Workouts" component={HomeWorkouts} />
       </Navigator>
     );
+
     return (
-      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-        <NavigationContainer>
-          <TabNavigator />
-        </NavigationContainer>
-      </ApplicationProvider>
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+          <NavigationContainer>
+            <TabNavigator />
+          </NavigationContainer>
+        </ApplicationProvider>
+      </>
     );
   }
 }
