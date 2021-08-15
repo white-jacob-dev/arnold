@@ -1,76 +1,108 @@
 import * as React from "react";
-import { View, Text, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as Font from 'expo-font';
-import Splash from "./Splash.js"
-import HomeWorkouts from "./HomeWorkouts.js"
-
+import * as Font from "expo-font";
+import DetailsScreen from "./DetailsScreen.js";
+import Splash from "./Splash.js";
+import HomeWorkouts from "./HomeWorkouts.js";
+import * as eva from "@eva-design/eva";
+import {
+  ApplicationProvider,
+  Layout,
+  Text,
+  Button,
+  BottomNavigation,
+  BottomNavigationTab,
+} from "@ui-kitten/components";
+import { default as theme } from "./theme.json";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Layout style={styles.layout} level="1">
+      <Text style={styles.header} category="h1">
+        HOME.
+      </Text>
       <Button
-        title="Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+        style={styles.button}
+        onPress={() => navigation.navigate("Details")}
+      >
+        DETAILS
+      </Button>
       <Button
-        title="Splash"
-        onPress={() => navigation.navigate('Splash')}
-      />
+        style={styles.button}
+        onPress={() => navigation.navigate("Splash")}
+      >
+        SPLASH
+      </Button>
       <Button
-        title="Home Workouts"
-        onPress={() => navigation.navigate('HomeWorkouts')}
-      />
-    </View>
+        style={styles.button}
+        onPress={() => navigation.navigate("HomeWorkouts")}
+      >
+        WORKOUTS
+      </Button>
+    </Layout>
   );
 }
 
-function DetailsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-      <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
-    </View>
-  );
-}
+const styles = StyleSheet.create({
+  layout: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  header: {
+    marginBottom: "5%",
+  },
+  button: {
+    marginBottom: "5%",
+  },
+});
 
 const Stack = createNativeStackNavigator();
 
 export default class App extends React.Component {
   async componentDidMount() {
     await Font.loadAsync({
-      'JosefinSans-Regular': require('./assets/fonts/JosefinSans-Regular.ttf'),
-      'JosefinSans-SemiBold': require('./assets/fonts/JosefinSans-SemiBold.ttf'),
-      'JosefinSans-Bold': require('./assets/fonts/JosefinSans-Bold.ttf'),
-      'Lato-Light': require('./assets/fonts/Lato-Light.ttf'),
+      "JosefinSans-Regular": require("./assets/fonts/JosefinSans-Regular.ttf"),
+      "JosefinSans-SemiBold": require("./assets/fonts/JosefinSans-SemiBold.ttf"),
+      "JosefinSans-Bold": require("./assets/fonts/JosefinSans-Bold.ttf"),
+      "Lato-Light": require("./assets/fonts/Lato-Light.ttf"),
     });
   }
 
   render() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: "Home Screen" }}
-        />
-        <Stack.Screen name="Details" component={DetailsScreen}/>
-        <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="HomeWorkouts" component={HomeWorkouts} />
+    const { Navigator, Screen } = createBottomTabNavigator();
 
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    const BottomTabBar = ({ navigation, state }) => (
+      <BottomNavigation
+        style={styles.navigation}
+        selectedIndex={state.index}
+        onSelect={(index) => navigation.navigate(state.routeNames[index])}
+      >
+        <BottomNavigationTab title="SPLASH" />
+        <BottomNavigationTab title="DETAILS" />
+        <BottomNavigationTab title="WORKOUTS" />
+      </BottomNavigation>
+    );
+
+    const TabNavigator = () => (
+      <Navigator
+        screenOptions={{ headerShown: false }}
+        tabBar={(props) => <BottomTabBar {...props} />}
+      >
+        <Screen name="Splash" component={Splash} />
+        <Screen name="Details" component={DetailsScreen} />
+        <Screen name="Workouts" component={HomeWorkouts} />
+      </Navigator>
+    );
+    return (
+      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+        <NavigationContainer>
+          <TabNavigator />
+        </NavigationContainer>
+      </ApplicationProvider>
+    );
   }
 }
-

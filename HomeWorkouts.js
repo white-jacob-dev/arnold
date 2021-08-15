@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   header: {
-    marginTop: '-5%',
+    marginTop: '10%',
     marginBottom: '-5%'
   },
   headerText: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowOffset: {width:3, height:3},
     position: 'absolute',
-    top: '3%',
+    top: '8%',
     right: '5%',
     flex: 1,
     alignItems: 'center',
