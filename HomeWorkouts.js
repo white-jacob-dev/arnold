@@ -36,7 +36,7 @@ class WorkoutSection extends Component {
             </Button>
           </View>
         </View>
-        <Divider style={{marginVertical: 5}}/>
+        <Divider style={{backgroundColor:'lightgray', marginVertical: 5, width: '50%', alignSelf: 'center'}}/>
       </View>
     );
   }
@@ -78,6 +78,7 @@ function HomeWorkouts({ navigation }) {
           REPS
         </Text>
       </View>
+      
       <ScrollView contentContainerStyle={styles.container}>
         <WorkoutSection
           name="Bench Press"
@@ -128,7 +129,7 @@ function HomeWorkouts({ navigation }) {
           sets="3"
           reps="10"
         />
-           <WorkoutSection
+        <WorkoutSection
           name="Bicep Curl"
           date="08/15"
           weight="20"
@@ -157,7 +158,6 @@ function HomeWorkouts({ navigation }) {
           reps="10"
         />
       </ScrollView>
-   
     </SafeAreaView>
   );
 }
@@ -179,7 +179,8 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-evenly', 
-    borderTopWidth:1, 
+    borderTopWidth:1,
+    borderBottomWidth: 1,
     borderColor:'#e8e8e8',
     
   },

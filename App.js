@@ -32,6 +32,7 @@ export default class App extends React.Component {
     const BottomTabBar = ({ navigation, state }) => (
       <SafeAreaView>
         <BottomNavigation
+          indicatorStyle={{height: 2}}
           selectedIndex={state.index}
           onSelect={(index) => navigation.navigate(state.routeNames[index])}
         >
