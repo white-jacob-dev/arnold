@@ -1,38 +1,48 @@
-import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import {
   Layout,
-  Card,
   Text,
   TopNavigation,
   TopNavigationAction,
   Icon,
+  Button,
+  List,
+  Divider
 } from "@ui-kitten/components";
+import { ScrollView } from "react-native-gesture-handler";
 
 class WorkoutSection extends Component {
   render() {
     return (
       <View style={styles.workoutSection}>
         <View style={styles.labelSection}>
-          <Text style={styles.label}>{this.props.name}</Text>
+          <Text category='label'>{this.props.name}</Text>
         </View>
         <View style={styles.infoCard}>
           <View style={styles.infoSection}>
-            <Text style={styles.info}>{this.props.date}</Text>
-            <Text style={styles.info}>
-              Weight <Text style={styles.infoBold}>{this.props.weight}</Text>
-            </Text>
-            <Text style={styles.info}>
-              Sets <Text style={styles.infoBold}>{this.props.sets}</Text>
-            </Text>
-            <Text style={styles.info}>
-              Reps <Text style={styles.infoBold}>{this.props.reps}</Text>
-            </Text>
+            <Button size='tiny' status='primary' appearance='outline'>
+              {this.props.date}
+              </Button>
+            <Button size='tiny' status='success'>
+            Weight {this.props.weight}
+            </Button>
+            <Button size='tiny' status='info'>
+            Sets {this.props.sets}
+            </Button>
+            <Button size='tiny' status='danger'>
+            Reps {this.props.reps}
+            </Button>
+            
           </View>
+
         </View>
+        <Divider style={{marginVertical: 5}}/>
+
       </View>
+
+      
     );
   }
 }
@@ -51,6 +61,7 @@ function HomeWorkouts({ navigation }) {
   const PlusAction = () => (
     <TopNavigationAction icon={PlusIcon} onPress={navigateBack} />
   );
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
       <TopNavigation
@@ -59,15 +70,7 @@ function HomeWorkouts({ navigation }) {
         accessoryLeft={BackAction}
         accessoryRight={PlusAction}
       />
-      <Layout style={styles.container} level="3">
-        <Card>
-          <Text>
-            The Maldives, officially the Republic of Maldives, is a small
-            country in South Asia, located in the Arabian Sea of the Indian
-            Ocean. It lies southwest of Sri Lanka and India, about 1,000
-            kilometres (620 mi) from the Asian continent
-          </Text>
-        </Card>
+      <ScrollView contentContainerStyle={styles.container} level="3">
         <WorkoutSection
           name="Bench Press"
           date="08/12"
@@ -117,8 +120,36 @@ function HomeWorkouts({ navigation }) {
           sets="3"
           reps="10"
         />
-        <StatusBar style="auto" />
-      </Layout>
+           <WorkoutSection
+          name="Bicep Curl"
+          date="08/15"
+          weight="20"
+          sets="5"
+          reps="25"
+        />
+        <WorkoutSection
+          name="Bench Press"
+          date="08/12"
+          weight="200"
+          sets="3"
+          reps="10"
+        />
+        <WorkoutSection
+          name="Bicep Curl"
+          date="08/15"
+          weight="20"
+          sets="5"
+          reps="25"
+        />
+        <WorkoutSection
+          name="Bench Press"
+          date="08/12"
+          weight="200"
+          sets="3"
+          reps="10"
+        />
+      </ScrollView>
+   
     </SafeAreaView>
   );
 }
@@ -130,53 +161,35 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    marginHorizontal: "2%",
+    flexGrow: 1
   },
-  header: {
-    marginTop: "10%",
-    marginBottom: "-5%",
-  },
-  headerText: {
-    color: "black",
-    fontSize: 50,
-    letterSpacing: -4,
-  },
-  period: {
-    color: "#D21E1E",
-    fontSize: 120,
-  },
-
   workoutSection: {
-    height: "10%",
-    width: "90%",
+    height: "13%",
+    width: "95%",
+    marginBottom: '-5%'
   },
   labelSection: {
-    height: "50%",
+    height: "20%",
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-end",
-  },
-  label: {
-    fontSize: 20,
-    letterSpacing: -1,
+    paddingLeft: 7
   },
   infoCard: {
     backgroundColor: "white",
-    height: "50%",
-    borderRadius: 10,
-    shadowColor: "black",
-    shadowOpacity: 1,
-    shadowOffset: { width: 3, height: 3 },
+    height: "80%",
+    borderRadius: 5,
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: '#e8e8e8'
   },
   infoSection: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
+    alignItems: 'center'
   },
-  info: {
-    fontSize: 17,
-  },
+
 });
