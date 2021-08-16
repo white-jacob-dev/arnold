@@ -18,31 +18,26 @@ class WorkoutSection extends Component {
     return (
       <View style={styles.workoutSection}>
         <View style={styles.labelSection}>
-          <Text category='label'>{this.props.name}</Text>
+          <Text category='c2'>{this.props.name}</Text>
         </View>
         <View style={styles.infoCard}>
           <View style={styles.infoSection}>
             <Button size='tiny' status='primary' appearance='outline'>
               {this.props.date}
               </Button>
-            <Button size='tiny' status='success'>
-            Weight {this.props.weight}
+            <Button size='tiny' status='primary' appearance='outline'>
+            {this.props.weight}
             </Button>
-            <Button size='tiny' status='info'>
-            Sets {this.props.sets}
+            <Button size='tiny' status='primary' appearance='outline'>
+            {this.props.sets}
             </Button>
-            <Button size='tiny' status='danger'>
-            Reps {this.props.reps}
+            <Button size='tiny' status='primary' appearance='outline'>
+            {this.props.reps}
             </Button>
-            
           </View>
-
         </View>
         <Divider style={{marginVertical: 5}}/>
-
       </View>
-
-      
     );
   }
 }
@@ -52,7 +47,7 @@ function HomeWorkouts({ navigation }) {
   const PlusIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
 
   const navigateBack = () => {
-    navigation.goBack();
+    navigation.navigate('WorkoutLibrary');
   };
 
   const BackAction = () => (
@@ -67,10 +62,23 @@ function HomeWorkouts({ navigation }) {
       <TopNavigation
         alignment="center"
         title=""
-        accessoryLeft={BackAction}
         accessoryRight={PlusAction}
       />
-      <ScrollView contentContainerStyle={styles.container} level="3">
+      <View style={styles.header}>
+        <Text category='p2' status="primary">
+          DATE
+        </Text>
+        <Text category='p2' status="primary">
+          WEIGHT
+        </Text>
+        <Text category='p2' status="primary">
+          SETS
+        </Text>
+        <Text category='p2' status="primary">
+          REPS
+        </Text>
+      </View>
+      <ScrollView contentContainerStyle={styles.container}>
         <WorkoutSection
           name="Bench Press"
           date="08/12"
@@ -161,10 +169,22 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: '#f5f5f5'
+  },
+  header: {
+    backgroundColor:'#ffffff', 
+    height:'5%', 
+    width:'100%', 
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-evenly', 
+    borderTopWidth:1, 
+    borderColor:'#e8e8e8',
+    
   },
   workoutSection: {
-    height: "13%",
+    height: "15%",
     width: "95%",
     marginBottom: '-5%'
   },

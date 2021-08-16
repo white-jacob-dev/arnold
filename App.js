@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DetailsScreen from "./DetailsScreen.js";
 import Splash from "./Splash.js";
 import HomeWorkouts from "./HomeWorkouts.js";
+import WorkoutLibrary from "./WorkoutLibrary.js";
+
 import * as eva from "@eva-design/eva";
 import {
   ApplicationProvider,
@@ -33,7 +35,7 @@ export default class App extends React.Component {
           selectedIndex={state.index}
           onSelect={(index) => navigation.navigate(state.routeNames[index])}
         >
-          <BottomNavigationTab title="Home" icon={HomeIcon} />
+          <BottomNavigationTab title="Workouts" icon={HomeIcon} />
           <BottomNavigationTab title="Folders" icon={FolderIcon} />
           <BottomNavigationTab title="Settings" icon={SettingsIcon} />
         </BottomNavigation>
@@ -45,9 +47,12 @@ export default class App extends React.Component {
         screenOptions={{ headerShown: false }}
         tabBar={(props) => <BottomTabBar {...props} />}
       >
-        <Screen name="Splash" component={Splash} />
-        <Screen name="Details" component={DetailsScreen} />
         <Screen name="Workouts" component={HomeWorkouts} />
+        <Screen name="Details" component={DetailsScreen} />
+        <Screen name="Splash" component={Splash} />
+        <Screen name="WorkoutLibrary" component={WorkoutLibrary} />
+
+        
       </Navigator>
     );
 
