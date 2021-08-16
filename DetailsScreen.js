@@ -1,10 +1,7 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import {
-  ApplicationProvider,
   Layout,
-  Text,
   Button,
   TopNavigation,
   TopNavigationAction,
@@ -25,13 +22,9 @@ function DetailsScreen({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
-      <TopNavigation
-        alignment="center"
-        title="DETAILS"
-        accessoryLeft={BackAction}
-      />
+      <TopNavigation alignment="center" title="" accessoryLeft={BackAction} />
 
-      <Layout style={styles.layout} level="2">
+      <Layout style={styles.layout} level="3">
         <Button
           style={styles.button}
           onPress={() => navigation.push("Details")}

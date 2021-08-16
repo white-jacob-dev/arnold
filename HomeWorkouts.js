@@ -1,19 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import {
-  Button,
-  ScrollView,
-  StyleSheet,
+  Layout,
+  Card,
   Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Home from "./assets/images/home.svg";
-import Folder from "./assets/images/folder.svg";
-import Gear from "./assets/images/gear.svg";
-import Plus from "./assets/images/plus.svg";
-import { NavigationContainer } from "@react-navigation/native";
-import { checkPropTypes } from "prop-types";
+  TopNavigation,
+  TopNavigationAction,
+  Icon,
+} from "@ui-kitten/components";
 
 class WorkoutSection extends Component {
   render() {
@@ -41,88 +37,89 @@ class WorkoutSection extends Component {
   }
 }
 
-class FooterMenu extends Component {
-  render() {
-    return (
-      <View style={styles.footer}>
-        <Home fill="#D21E1E75" />
-        <TouchableOpacity styles={styles.test}>
-          <Folder />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Gear />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
-
 function HomeWorkouts({ navigation }) {
+  const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
+  const PlusIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
+
+  const navigateBack = () => {
+    navigation.goBack();
+  };
+
+  const BackAction = () => (
+    <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+  );
+  const PlusAction = () => (
+    <TopNavigationAction icon={PlusIcon} onPress={navigateBack} />
+  );
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>
-          Workouts<Text style={styles.period}>.</Text>
-        </Text>
-      </View>
-      <TouchableOpacity
-        style={styles.circle}
-        onPress={() => navigation.navigate("Home")}
-      >
-        <Plus height={30} width={30} style={styles.plus} />
-      </TouchableOpacity>
-      <WorkoutSection
-        name="Bench Press"
-        date="08/12"
-        weight="200"
-        sets="3"
-        reps="10"
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
+      <TopNavigation
+        alignment="center"
+        title=""
+        accessoryLeft={BackAction}
+        accessoryRight={PlusAction}
       />
-      <WorkoutSection
-        name="Bicep Curl"
-        date="08/15"
-        weight="20"
-        sets="5"
-        reps="25"
-      />
-      <WorkoutSection
-        name="Bench Press"
-        date="08/12"
-        weight="200"
-        sets="3"
-        reps="10"
-      />
-      <WorkoutSection
-        name="Bicep Curl"
-        date="08/15"
-        weight="20"
-        sets="5"
-        reps="25"
-      />
-      <WorkoutSection
-        name="Bench Press"
-        date="08/12"
-        weight="200"
-        sets="3"
-        reps="10"
-      />
-      <WorkoutSection
-        name="Bicep Curl"
-        date="08/15"
-        weight="20"
-        sets="5"
-        reps="25"
-      />
-      <WorkoutSection
-        name="Bench Press"
-        date="08/12"
-        weight="200"
-        sets="3"
-        reps="10"
-      />
-      <FooterMenu />
-      <StatusBar style="auto" />
-    </View>
+      <Layout style={styles.container} level="3">
+        <Card>
+          <Text>
+            The Maldives, officially the Republic of Maldives, is a small
+            country in South Asia, located in the Arabian Sea of the Indian
+            Ocean. It lies southwest of Sri Lanka and India, about 1,000
+            kilometres (620 mi) from the Asian continent
+          </Text>
+        </Card>
+        <WorkoutSection
+          name="Bench Press"
+          date="08/12"
+          weight="200"
+          sets="3"
+          reps="10"
+        />
+        <WorkoutSection
+          name="Bicep Curl"
+          date="08/15"
+          weight="20"
+          sets="5"
+          reps="25"
+        />
+        <WorkoutSection
+          name="Bench Press"
+          date="08/12"
+          weight="200"
+          sets="3"
+          reps="10"
+        />
+        <WorkoutSection
+          name="Bicep Curl"
+          date="08/15"
+          weight="20"
+          sets="5"
+          reps="25"
+        />
+        <WorkoutSection
+          name="Bench Press"
+          date="08/12"
+          weight="200"
+          sets="3"
+          reps="10"
+        />
+        <WorkoutSection
+          name="Bicep Curl"
+          date="08/15"
+          weight="20"
+          sets="5"
+          reps="25"
+        />
+        <WorkoutSection
+          name="Bench Press"
+          date="08/12"
+          weight="200"
+          sets="3"
+          reps="10"
+        />
+        <StatusBar style="auto" />
+      </Layout>
+    </SafeAreaView>
   );
 }
 export default HomeWorkouts;
@@ -131,9 +128,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
+    marginHorizontal: "2%",
   },
   header: {
     marginTop: "10%",
@@ -148,21 +145,7 @@ const styles = StyleSheet.create({
     color: "#D21E1E",
     fontSize: 120,
   },
-  circle: {
-    backgroundColor: "white",
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    shadowColor: "#D21E1E",
-    shadowOpacity: 1,
-    shadowOffset: { width: 3, height: 3 },
-    position: "absolute",
-    top: "8%",
-    right: "5%",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   workoutSection: {
     height: "10%",
     width: "90%",
@@ -195,22 +178,5 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 17,
-  },
-  infoBold: {},
-  footer: {
-    position: "absolute",
-    zIndex: 2,
-    backgroundColor: "white",
-    bottom: 30,
-    height: "6%",
-    width: "70%",
-    borderRadius: 25,
-    shadowColor: "#D21E1E",
-    shadowOpacity: 1,
-    shadowOffset: { width: 3, height: 3 },
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
   },
 });

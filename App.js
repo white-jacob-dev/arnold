@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DetailsScreen from "./DetailsScreen.js";
@@ -8,61 +8,14 @@ import HomeWorkouts from "./HomeWorkouts.js";
 import * as eva from "@eva-design/eva";
 import {
   ApplicationProvider,
-  Layout,
-  Text,
-  Button,
   BottomNavigation,
   BottomNavigationTab,
   IconRegistry,
+  Icon,
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as theme } from "./theme.json";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-function HomeScreen({ navigation }) {
-  return (
-    <Layout style={styles.layout} level="1">
-      <Text style={styles.header} category="h1">
-        HOME.
-      </Text>
-      <Button
-        style={styles.button}
-        onPress={() => navigation.navigate("Details")}
-      >
-        DETAILS
-      </Button>
-      <Button
-        style={styles.button}
-        onPress={() => navigation.navigate("Splash")}
-      >
-        SPLASH
-      </Button>
-      <Button
-        style={styles.button}
-        onPress={() => navigation.navigate("HomeWorkouts")}
-      >
-        WORKOUTS
-      </Button>
-    </Layout>
-  );
-}
-
-const styles = StyleSheet.create({
-  layout: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  header: {
-    marginBottom: "5%",
-  },
-  button: {
-    marginBottom: "5%",
-  },
-  navigation: {
-    marginBottom: "5%",
-  },
-});
 
 const Stack = createNativeStackNavigator();
 
@@ -70,16 +23,21 @@ export default class App extends React.Component {
   render() {
     const { Navigator, Screen } = createBottomTabNavigator();
 
+    const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
+    const FolderIcon = (props) => <Icon {...props} name="folder-outline" />;
+    const SettingsIcon = (props) => <Icon {...props} name="settings-outline" />;
+
     const BottomTabBar = ({ navigation, state }) => (
-      <BottomNavigation
-        style={styles.navigation}
-        selectedIndex={state.index}
-        onSelect={(index) => navigation.navigate(state.routeNames[index])}
-      >
-        <BottomNavigationTab title="SPLASH" />
-        <BottomNavigationTab title="DETAILS" />
-        <BottomNavigationTab title="WORKOUTS" />
-      </BottomNavigation>
+      <SafeAreaView>
+        <BottomNavigation
+          selectedIndex={state.index}
+          onSelect={(index) => navigation.navigate(state.routeNames[index])}
+        >
+          <BottomNavigationTab title="Home" icon={HomeIcon} />
+          <BottomNavigationTab title="Folders" icon={FolderIcon} />
+          <BottomNavigationTab title="Settings" icon={SettingsIcon} />
+        </BottomNavigation>
+      </SafeAreaView>
     );
 
     const TabNavigator = () => (
@@ -92,6 +50,23 @@ export default class App extends React.Component {
         <Screen name="Workouts" component={HomeWorkouts} />
       </Navigator>
     );
+
+    const styles = StyleSheet.create({
+      layout: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      header: {
+        marginBottom: "5%",
+      },
+      button: {
+        marginBottom: "5%",
+      },
+      navigation: {
+        marginBottom: "5%",
+      },
+    });
 
     return (
       <>
