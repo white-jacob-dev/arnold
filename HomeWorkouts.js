@@ -18,7 +18,7 @@ class WorkoutSection extends Component {
     return (
       <View style={styles.workoutSection}>
         <View style={styles.labelSection}>
-          <Text category='c2'>{this.props.name}</Text>
+          <Text category='label'>{this.props.name}</Text>
         </View>
         <View style={styles.infoCard}>
           <View style={styles.infoSection}>
@@ -50,6 +50,10 @@ function HomeWorkouts({ navigation }) {
     navigation.navigate('WorkoutLibrary');
   };
 
+  const title = (props) => (
+    <Text category='h6'>Your Workouts</Text>
+  );
+
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
@@ -61,7 +65,7 @@ function HomeWorkouts({ navigation }) {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
       <TopNavigation
         alignment="center"
-        title=""
+        title={title}
         accessoryRight={PlusAction}
       />
       <View style={styles.header}>
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-end",
-    paddingLeft: 7
+    paddingLeft: 7,
   },
   infoCard: {
     backgroundColor: "white",

@@ -1,11 +1,12 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   Layout,
   Button,
   TopNavigation,
   TopNavigationAction,
   Icon,
+  Input
 } from "@ui-kitten/components";
 import { SafeAreaView } from "react-navigation";
 
@@ -20,9 +21,28 @@ function WorkoutLibrary({ navigation }) {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
 
+  const [value, setValue] = React.useState('')
+
+  const inputField = (props) => (
+    <View>
+      <Input
+          style={styles.input} 
+          placeholder='Search Workouts'
+          size='small'
+          value={value}
+          onChangeText={nextValue => setValue(nextValue)}
+      />
+    </View>
+  )
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
-      <TopNavigation alignment="center" title="" accessoryLeft={BackAction} />
+      <TopNavigation 
+        style={styles.topNav}
+        title={inputField}
+        accessoryLeft={BackAction} 
+        alignment='center'
+      />
 
       <Layout style={styles.layout} level="3">
         <Button
@@ -66,5 +86,13 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: "5%",
   },
+  input: {
+    width: '70%',
+    borderRadius: 5
+  },
+  topNav: {
+    borderBottomWidth: 1,
+    borderColor:'#e8e8e8',
+  }
 });
 
