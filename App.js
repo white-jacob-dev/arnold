@@ -35,6 +35,7 @@ export default class App extends React.Component {
           indicatorStyle={{ height: 2 }}
           selectedIndex={state.index}
           onSelect={(index) => navigation.navigate(state.routeNames[index])}
+          style={styles.bottomNav}
         >
           <BottomNavigationTab title="Workouts" icon={HomeIcon} />
           <BottomNavigationTab title="Folders" icon={FolderIcon} />
@@ -69,6 +70,13 @@ export default class App extends React.Component {
       },
       navigation: {
         marginBottom: "5%",
+      },
+      bottomNav: {
+        zIndex: 2,
+        shadowColor: "black",
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: -8 },
+        shadowRadius: 5,
       },
     });
 

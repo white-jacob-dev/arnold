@@ -72,6 +72,7 @@ function HomeWorkouts({ navigation }) {
         alignment="center"
         title={title}
         accessoryRight={PlusAction}
+        style={styles.topNav}
       />
       <Layout level="1" style={styles.header}>
         <Text category="c2" status="primary">
@@ -188,8 +189,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     borderTopWidth: 1,
-    borderBottomWidth: 1,
     borderColor: "#e8e8e8",
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 8 },
+    shadowRadius: 5,
+    zIndex: 2,
   },
   workoutSection: {
     height: "15%",

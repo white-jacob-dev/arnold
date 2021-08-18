@@ -14,25 +14,38 @@ import {
 import { SafeAreaView } from "react-navigation";
 
 function FoldersScreen({ navigation }) {
-  const title = (props) => <Text category="h6">Your Folders</Text>;
+  const theme = useTheme();
 
   const PlusIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
+  const FolderIcon = (props) => <Icon {...props} name="folder" />;
+  const EditIcon = (props) => (
+    <Icon {...props} name="edit-2-outline" fill="#d3d3d3" />
+  );
+  const RedFolderIcon = (props) => (
+    <Icon {...props} name="folder" fill={theme["color-primary-default"]} />
+  );
+
   const PlusAction = () => <TopNavigationAction icon={PlusIcon} />;
-  const theme = useTheme();
+
+  const title = (props) => <Text category="h6">Your Folders</Text>;
 
   const data = new Array(8).fill({
     title: "Title for Item",
     description: "Description for Item",
   });
 
-  const EditIcon = (props) => (
-    <Icon {...props} name="edit-2-outline" fill="#d3d3d3" />
-  );
+  const navigate = () => {
+    navigation.navigate("Library");
+  };
 
-  const RedFolderIcon = (props) => (
-    <Icon {...props} name="folder" fill={theme["color-primary-default"]} />
+  const editButton = (props) => (
+    <Button
+      {...props}
+      appearance="ghost"
+      accessoryLeft={EditIcon}
+      onPress={navigate}
+    />
   );
-  const FolderIcon = (props) => <Icon {...props} name="folder" />;
 
   const renderItem = ({ item, index }) => (
     <ListItem
@@ -40,7 +53,7 @@ function FoldersScreen({ navigation }) {
       title={index == 0 ? "Favorites" : `${item.title} ${index + 1}`}
       description={index == 0 ? "" : `${item.description} ${index + 1}`}
       accessoryLeft={index == 0 ? RedFolderIcon : FolderIcon}
-      accessoryRight={EditIcon}
+      accessoryRight={editButton}
     />
   );
 
@@ -64,9 +77,6 @@ const styles = StyleSheet.create({
   layout: {
     flex: 1,
   },
-  header: {
-    marginBottom: "5%",
-  },
   listItem: {
     width: "90%",
     alignSelf: "center",
@@ -74,8 +84,11 @@ const styles = StyleSheet.create({
     marginTop: "2%",
   },
   topNav: {
-    borderBottomWidth: 1,
-    borderColor: "#e8e8e8",
+    zIndex: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 8 },
+    shadowRadius: 5,
   },
 });
 

@@ -37,7 +37,12 @@ function WorkoutLibrary({ navigation }) {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "#ffffff",
+      }}
+    >
       <TopNavigation
         style={styles.topNav}
         title={inputField}
@@ -58,19 +63,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  header: {
-    marginBottom: "5%",
-  },
-  button: {
-    marginBottom: "5%",
+    zIndex: 1,
   },
   input: {
     width: "70%",
     borderRadius: 5,
   },
   topNav: {
-    borderBottomWidth: 1,
-    borderColor: "#e8e8e8",
+    zIndex: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 8 },
+    shadowRadius: 5,
   },
 });
