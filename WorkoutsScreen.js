@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import {
   Layout,
@@ -9,7 +9,7 @@ import {
   Icon,
   Button,
   List,
-  Divider
+  Divider,
 } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -18,25 +18,32 @@ class WorkoutSection extends Component {
     return (
       <View style={styles.workoutSection}>
         <View style={styles.labelSection}>
-          <Text category='label'>{this.props.name}</Text>
+          <Text category="label">{this.props.name}</Text>
         </View>
         <View style={styles.infoCard}>
           <View style={styles.infoSection}>
-            <Button size='tiny' status='primary' appearance='outline'>
+            <Button size="tiny" status="primary" appearance="outline">
               {this.props.date}
-              </Button>
-            <Button size='tiny' status='primary' appearance='outline'>
-            {this.props.weight}
             </Button>
-            <Button size='tiny' status='primary' appearance='outline'>
-            {this.props.sets}
+            <Button size="tiny" status="primary" appearance="outline">
+              {this.props.weight}
             </Button>
-            <Button size='tiny' status='primary' appearance='outline'>
-            {this.props.reps}
+            <Button size="tiny" status="primary" appearance="outline">
+              {this.props.sets}
+            </Button>
+            <Button size="tiny" status="primary" appearance="outline">
+              {this.props.reps}
             </Button>
           </View>
         </View>
-        <Divider style={{backgroundColor:'lightgray', marginVertical: 5, width: '50%', alignSelf: 'center'}}/>
+        <Divider
+          style={{
+            backgroundColor: "lightgray",
+            marginVertical: 5,
+            width: "50%",
+            alignSelf: "center",
+          }}
+        />
       </View>
     );
   }
@@ -47,12 +54,10 @@ function HomeWorkouts({ navigation }) {
   const PlusIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
 
   const navigateBack = () => {
-    navigation.navigate('WorkoutLibrary');
+    navigation.navigate("Library");
   };
 
-  const title = (props) => (
-    <Text category='h6'>Your Workouts</Text>
-  );
+  const title = (props) => <Text category="h6">Your Workouts</Text>;
 
   const BackAction = () => (
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
@@ -68,21 +73,21 @@ function HomeWorkouts({ navigation }) {
         title={title}
         accessoryRight={PlusAction}
       />
-      <View style={styles.header}>
-        <Text category='p2' status="primary">
+      <Layout level="1" style={styles.header}>
+        <Text category="c2" status="primary">
           DATE
         </Text>
-        <Text category='p2' status="primary">
+        <Text category="c2" status="primary">
           WEIGHT
         </Text>
-        <Text category='p2' status="primary">
+        <Text category="c2" status="primary">
           SETS
         </Text>
-        <Text category='p2' status="primary">
+        <Text category="c2" status="primary">
           REPS
         </Text>
-      </View>
-      
+      </Layout>
+
       <ScrollView contentContainerStyle={styles.container}>
         <WorkoutSection
           name="Bench Press"
@@ -174,24 +179,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     flexGrow: 1,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: "#f5f5f5",
   },
   header: {
-    backgroundColor:'#ffffff', 
-    height:'5%', 
-    width:'100%', 
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-evenly', 
-    borderTopWidth:1,
+    height: "5%",
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor:'#e8e8e8',
-    
+    borderColor: "#e8e8e8",
   },
   workoutSection: {
     height: "15%",
     width: "95%",
-    marginBottom: '-5%'
+    marginBottom: "-5%",
   },
   labelSection: {
     height: "20%",
@@ -208,13 +211,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: '#e8e8e8'
+    borderColor: "#e8e8e8",
   },
   infoSection: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
-    alignItems: 'center'
+    alignItems: "center",
   },
-
 });

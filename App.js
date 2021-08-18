@@ -2,10 +2,10 @@ import * as React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DetailsScreen from "./DetailsScreen.js";
-import Splash from "./Splash.js";
-import HomeWorkouts from "./HomeWorkouts.js";
-import WorkoutLibrary from "./WorkoutLibrary.js";
+import Folders from "./FoldersScreen.js";
+import Splash from "./SplashScreen.js";
+import Workouts from "./WorkoutsScreen.js";
+import Library from "./LibraryScreen.js";
 
 import * as eva from "@eva-design/eva";
 import {
@@ -32,7 +32,7 @@ export default class App extends React.Component {
     const BottomTabBar = ({ navigation, state }) => (
       <SafeAreaView>
         <BottomNavigation
-          indicatorStyle={{height: 2}}
+          indicatorStyle={{ height: 2 }}
           selectedIndex={state.index}
           onSelect={(index) => navigation.navigate(state.routeNames[index])}
         >
@@ -48,12 +48,10 @@ export default class App extends React.Component {
         screenOptions={{ headerShown: false }}
         tabBar={(props) => <BottomTabBar {...props} />}
       >
-        <Screen name="Workouts" component={HomeWorkouts} />
-        <Screen name="Details" component={DetailsScreen} />
+        <Screen name="Workouts" component={Workouts} />
+        <Screen name="Folders" component={Folders} />
         <Screen name="Splash" component={Splash} />
-        <Screen name="WorkoutLibrary" component={WorkoutLibrary} />
-
-        
+        <Screen name="Library" component={Library} />
       </Navigator>
     );
 

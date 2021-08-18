@@ -6,7 +6,8 @@ import {
   TopNavigation,
   TopNavigationAction,
   Icon,
-  Input
+  Input,
+  Text,
 } from "@ui-kitten/components";
 import { SafeAreaView } from "react-navigation";
 
@@ -21,58 +22,36 @@ function WorkoutLibrary({ navigation }) {
     <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
   );
 
-  const [value, setValue] = React.useState('')
+  const [value, setValue] = React.useState("");
 
   const inputField = (props) => (
     <View>
       <Input
-          style={styles.input} 
-          placeholder='Search Workouts'
-          size='small'
-          value={value}
-          onChangeText={nextValue => setValue(nextValue)}
+        style={styles.input}
+        placeholder="Search Workouts"
+        size="small"
+        value={value}
+        onChangeText={(nextValue) => setValue(nextValue)}
       />
     </View>
-  )
+  );
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
-      <TopNavigation 
+      <TopNavigation
         style={styles.topNav}
         title={inputField}
-        accessoryLeft={BackAction} 
-        alignment='center'
+        accessoryLeft={BackAction}
+        alignment="center"
       />
 
-      <Layout style={styles.layout} level="3">
-        <Button
-          style={styles.button}
-          onPress={() => navigation.push("Details")}
-        >
-          Details again
-        </Button>
-        <Button
-          style={styles.button}
-          onPress={() => navigation.navigate("Home")}
-        >
-          Home
-        </Button>
-        <Button
-          style={styles.button}
-          title="Go back"
-          onPress={() => navigation.goBack()}
-        >
-          Go back
-        </Button>
-        <Button style={styles.button} onPress={() => navigation.popToTop()}>
-          First screen in stack
-        </Button>
+      <Layout style={styles.layout}>
+        <Text>Here's a list of all available workouts</Text>
       </Layout>
     </SafeAreaView>
   );
 }
 export default WorkoutLibrary;
-
 
 const styles = StyleSheet.create({
   layout: {
@@ -87,12 +66,11 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
   },
   input: {
-    width: '70%',
-    borderRadius: 5
+    width: "70%",
+    borderRadius: 5,
   },
   topNav: {
     borderBottomWidth: 1,
-    borderColor:'#e8e8e8',
-  }
+    borderColor: "#e8e8e8",
+  },
 });
-

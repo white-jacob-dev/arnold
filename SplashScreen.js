@@ -1,8 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import { StyleService, useStyleSheet, useTheme } from "@ui-kitten/components";
 
 function Splash() {
+  const styles = useStyleSheet(themedStyles);
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
@@ -15,7 +18,7 @@ function Splash() {
 }
 export default Splash;
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
   container: {
     flex: 1,
     marginTop: "-20%",
@@ -30,9 +33,8 @@ const styles = StyleSheet.create({
     letterSpacing: -2,
   },
   period: {
-    color: "#D21E1E",
-    fontSize: 150,
-    fontWeight: "bold",
+    color: "color-primary-default",
+    fontSize: 120,
   },
   subheader: {
     marginTop: "-7%",
